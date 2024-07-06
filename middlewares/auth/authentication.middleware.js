@@ -12,7 +12,7 @@ const authenticationHandler = async (req, res, next) => {
         return next(new appError("Unauthorized , invalid token.", 403));
       }
 
-      req.customer = data;
+      req.user = data;
       next();
     });
   } else {
