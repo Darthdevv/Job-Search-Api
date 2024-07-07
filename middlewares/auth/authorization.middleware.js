@@ -1,10 +1,12 @@
-import appError from "../../utils/appError";
+import User from "../../models/user.model.js";
+import appError from "../../utils/appError.js";
 
-const authorizationHandler = (roles) => {
+const authorizationHandler = (allowedRoles) => {
   return async (req, res, next) => {
-    const user = req.user;
+    const loggedUser = req.user;
+    const authorizedUser = await User.findById(loggedUser.id);
 
-    if (!roles.includes(user.role)) {
+    if (!allowedRoles.includes(authorizedUser.role)) {
       return next(
         new appError(
           "Authorization Error: You are not allowed to access this route",

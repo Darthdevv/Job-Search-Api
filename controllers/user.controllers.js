@@ -85,7 +85,7 @@ export const signIn = catchAsync(async (req, res, next) => {
       return next(new appError("Invalid Password.", 400));
     }
 
-    const { _id: id, userName } = user;
+    const { _id: id, userName, role } = user;
 
     const token = jwt.sign({ id, userName}, process.env.JWT_SECRET_KEY, {
       expiresIn: "1d",
@@ -95,7 +95,7 @@ export const signIn = catchAsync(async (req, res, next) => {
     const updatedStatus = "online";
     await User.findByIdAndUpdate(id, { status: updatedStatus });
 
-    res.status(200).json({ token, id, userName });
+    res.status(200).json({ token, id, userName, role });
 })
 
 export const getUserAccounts = catchAsync(async (req, res, next) => {
