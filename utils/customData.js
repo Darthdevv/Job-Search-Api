@@ -1,6 +1,6 @@
 export const systemRoles = {
   User: "user",
-  Company_HR: "humanResources",
+  Company_HR: "human resources",
 };
 
 const { User, Company_HR } = systemRoles;

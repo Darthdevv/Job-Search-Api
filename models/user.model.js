@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import {systemRoles} from '../utils/customData.js'
 
 
 const userSchema = new mongoose.Schema(
@@ -11,7 +12,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true
     },
-    username: {
+    userName: {
       type: String,
       unique: true,
       required: true
@@ -37,7 +38,7 @@ const userSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ["User", "Company_HR"],
+      enum: Object.values(systemRoles),
       required: true
     },
     status: {
