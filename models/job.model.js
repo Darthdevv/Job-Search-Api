@@ -4,7 +4,7 @@ const jobSchema = new mongoose.Schema(
   {
     jobTitle: {
       type: String,
-      required: true
+      required: true,
     },
     jobLocation: {
       type: String,
@@ -23,19 +23,24 @@ const jobSchema = new mongoose.Schema(
     },
     jobDescription: {
       type: String,
-      required: true
+      required: true,
     },
     technicalSkills: {
       type: [String],
-      required: true
+      required: true,
     },
     softSkills: {
       type: [String],
-      required: true
+      required: true,
     },
     addedBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
+      required: true,
+    },
+    companyId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Company",
       required: true,
     },
   },
