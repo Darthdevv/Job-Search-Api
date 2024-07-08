@@ -54,10 +54,87 @@ export const addCompanyData = catchAsync(async (req, res, next) => {
       .json({ message: "Company's data has been added successfully.", data: company });
 });
 
-export const updateCompanyData = catchAsync(async (req, res, next) => { });
+export const updateCompanyData = catchAsync(async (req, res, next) => {
+  const { id } = req.params;
+
+  const {
+    companyName,
+    description,
+    industry,
+    address,
+    numberOfEmployees,
+    companyEmail,
+  } = req.body;
+
+  if (
+    !companyName ||
+    !description ||
+    !industry ||
+    !address ||
+    !numberOfEmployees ||
+    !companyEmail
+  ) {
+    return next(new appError("Please fill in all fields.", 400));
+  }
+
+  const lowerCaseCompanyEmail = companyEmail.toLowerCase();
+
+  const companyExists = await Company.findOne({
+    companyEmail: lowerCaseCompanyEmail,
+  });
+
+  if (companyExists) {
+    return next(new appError("Company's email already exists", 409));
+  }
+
+  const company = await Company.findById(id);
+
+  if (!company) {
+    return next(new appError("Company Not Found.", 404));
+  }
 
 
-export const deleteCompanyData = catchAsync(async (req, res, next) => { });
+  if (company.companyHR == req.user.id) {
+    const updatedCompany = await Company.findByIdAndUpdate(
+      id,
+      {
+        companyName,
+        description,
+        industry,
+        address,
+        numberOfEmployees,
+        companyEmail,
+        companyHR: req.user.id,
+      },
+      { new: true }
+    );
+
+    res.status(200).json({
+      message: "Company's Data updated successfully.",
+      data: updatedCompany,
+    });
+  } else {
+    return next(new appError("Failed to update Company's Data.", 403));
+  }
+});
+
+
+export const deleteCompanyData = catchAsync(async (req, res, next) => {
+  const { id } = req.params;
+  const company = await Company.findById(id);
+
+  if (!company) {
+    return next(new appError("Company Not Found.", 404));
+  }
+
+  if (company.companyHR == req.user.id) {
+    await Company.findByIdAndDelete(id);
+
+    res.status(204).json({ message: "Company's Data deleted successfully." });
+  } else {
+    return next(new appError("Failed to delete Company's Data.", 403));
+  }
+});
 
 
 export const getCompanyData = catchAsync(async (req, res, next) => {

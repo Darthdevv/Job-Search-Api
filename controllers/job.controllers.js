@@ -96,3 +96,74 @@ export const getJobsForSpecificCompany = catchAsync(async (req, res, next) => {
     return next(new appError("Company Not Found", 404));
   }
 })
+
+
+export const updateJob = catchAsync(async (req, res, next) => {
+  const { id } = req.params;
+
+  const {
+    jobTitle,
+    jobLocation,
+    workingTime,
+    seniorityLevel,
+    jobDescription,
+    technicalSkills,
+    softSkills,
+  } = req.body;
+
+  if (
+    !jobTitle ||
+    !jobLocation ||
+    !workingTime ||
+    !seniorityLevel ||
+    !jobDescription ||
+    !technicalSkills ||
+    !softSkills
+  ) {
+    return next(new appError("Please fill in all fields.", 400));
+  }
+
+  const job = await Job.findById(id);
+
+  if (job) {
+    const updatedJob = await Job.findByIdAndUpdate(
+      id,
+      {
+        jobTitle,
+        jobLocation,
+        workingTime,
+        seniorityLevel,
+        jobDescription,
+        technicalSkills,
+        softSkills,
+      },
+      { new: true }
+    );
+
+    res.status(200).json({
+      message: "Job updated successfully.",
+      data: updatedJob,
+    });
+  } else {
+    return next(new appError("Failed to update Job.", 403));
+  }
+});
+
+
+
+export const deleteJob = catchAsync(async (req, res, next) => {
+  const { id } = req.params;
+  const job = await Job.findById(id);
+
+  if (!job) {
+    return next(new appError("Job Not Found.", 404));
+  }
+
+  if (job) {
+    await Job.findByIdAndDelete(id);
+
+    res.status(204).json({ message: "Job deleted successfully." });
+  } else {
+    return next(new appError("Failed to delete Job.", 403));
+  }
+});
