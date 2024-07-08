@@ -129,49 +129,83 @@ export const getSpecificUserAccount = catchAsync(async (req, res, next) => {
 });
 
 export const updateAccount = catchAsync(async (req, res, next) => {
-  const { id } = req.params;
+  const {
+    firstName,
+    lastName,
+    email,
+    recoveryEmail,
+    DOB,
+    mobileNumber,
+  } = req.body;
 
-  const { name, bio, birthDate } = req.body;
-
-  if (!name || !bio || !birthDate) {
-    return next(new appError("Please fill all fields", 400));
+  if (
+    !firstName ||
+    !lastName ||
+    !email ||
+    !recoveryEmail ||
+    !DOB ||
+    !mobileNumber
+  ) {
+    return next(new appError("Please fill in all fields.", 400));
   }
 
-  const books = await Book.find();
-  const authorBooks = books.filter((book) => book.author == name);
+  const userName = `${firstName} ${lastName}`;
 
-  if (!authorBooks) {
-    return next(new appError("No books found for this author", 404));
+  //get user from database
+  const user = await User.findById(req.user.id);
+  const { role, password } = user;
+
+  if (!user) {
+    return next(new appError("User not found.", 404));
   }
 
-  const updatedAuthor = await Author.findByIdAndUpdate(
-    id,
-    {
-      name,
-      bio,
-      birthDate,
-      books: authorBooks,
-    },
-    { new: true }
-  );
+  const lowerCaseEmail = email.toLowerCase();
+  //make sure that the email does not already exist
+  const emailExists = await User.findOne({ email: lowerCaseEmail });
 
-  if (!updatedAuthor) {
-    return next(new appError("failed to update this Author", 400));
+  if (emailExists && emailExists._id != req.user.id) {
+    return next(new appError("Email already exists.", 409));
   }
 
-  res.status(200).json({ updatedAuthor });
+  //update user info on database
+  if (user._id == req.user.id) {
+    const updatedUser = await User.findByIdAndUpdate(
+      req.user.id,
+      {
+        firstName,
+        lastName,
+        userName,
+        email,
+        recoveryEmail,
+        DOB,
+        mobileNumber,
+        role,
+        password,
+      },
+      { new: true }
+    );
+
+    res.status(200).json({ message: "User Account updated successfully.", data : updatedUser });
+  } else {
+    return next(new appError("Failed to update User Account.", 403));
+  }
 });
 
 export const deleteAccount = catchAsync(async (req, res, next) => {
-  const { id } = req.params;
 
-  if (!id) {
-    return next(new appError("Author unavailable.", 400));
+  const user = await User.findById(req.user.id);
+
+  if (!user) {
+    return next(new appError("User not found.", 404));
   }
 
-  await Author.findByIdAndDelete(id);
+  if (user._id == req.user.id) {
+    await User.findByIdAndDelete(req.user.id);
 
-  res.status(204).json({ message: "Author deleted successfully." });
+    res.status(204).json({ message: "User Account deleted successfully." });
+  } else {
+    return next(new appError("Failed to delete User Account.", 403));
+  }
 });
 
 
