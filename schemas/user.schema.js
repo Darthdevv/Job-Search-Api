@@ -62,9 +62,28 @@ export const signUpSchema = {
 
 export const signInSchema = {
   body: Joi.object({
-    email: Joi.string().email().required(),
-    password: Joi.string().required(),
-  }),
+    email: Joi.string().email({
+      tlds: { allow: ["com", "net", "org"] },
+      minDomainSegments: 1,
+      maxDomainSegments: 4,
+    }),
+    password: Joi.string()
+      .required()
+      .pattern(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$!%*?&@])[A-Za-z\d$!%*?&@]{8,}$/
+      )
+      .messages({
+        "string.pattern.base":
+          "Password should have a minimum length of 8 characters with at least one lowercase letter, one uppercase letter, one number and one special character",
+        "any.required": "You need to provide a password",
+      })
+      .required(),
+  }).with("email", "password"), //peer
+  headers: Joi.object({
+    ...generalRules.headers,
+    "content-type": Joi.string(),
+    "content-length": Joi.string(),
+  }).options({ presence: "required" }),
 };
 
 
@@ -85,19 +104,41 @@ export const getSpecificUserSchema = {
 
 export const updateUserSchema = {
   body: Joi.object({
-    email: Joi.string().email().required(),
-    password: Joi.string().required(),
+    firstName: Joi.string().min(2).max(30).alphanum().required(),
+    lastName: Joi.string().min(2).max(30).alphanum().required(),
+    email: Joi.string().email({
+      tlds: { allow: ["com", "net", "org"] },
+      minDomainSegments: 1,
+      maxDomainSegments: 4,
+    }),
+    recoveryEmail: Joi.string().email({
+      tlds: { allow: ["com", "net", "org"] },
+      minDomainSegments: 1,
+      maxDomainSegments: 4,
+    }),
+    DOB: Joi.date().required(),
+    mobileNumber: Joi.string()
+      .pattern(/^[0-9]{10,15}$/)
+      .messages({
+        "string.pattern.base":
+          "Phone number must be between 10 to 15 digits and contain only numbers.",
+        "string.empty": "Phone number cannot be empty.",
+      })
+      .required(),
   }),
-  header: Joi.object({
-
-  })
+  headers: Joi.object({
+    ...generalRules.headers,
+    "content-type": Joi.string(),
+    "content-length": Joi.string(),
+    "authorization": Joi.string()
+  }).options({ presence: "required" }),
 };
 
 
 export const deleteUserSchema = {
   headers: Joi.object({
-    email: Joi.string().email().required(),
-    password: Joi.string().required(),
-  }),
+    ...generalRules.headers,
+    authorization: Joi.string(),
+  }).options({ presence: "required" }),
 };
 

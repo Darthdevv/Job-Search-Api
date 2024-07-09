@@ -6,6 +6,14 @@ import { catchAsync } from '../utils/catchAsync.js'
 import APIFeatures from '../utils/apiFeatures.js'
 
 
+/**
+ * @param {object} req
+ * @param {object} res
+ * @param {object} next
+ * @returns {object} returns response {message, data}
+ * @description create new user
+ **/
+
 export const signUp = catchAsync(async (req, res, next) => {
   const {
     firstName,
@@ -65,6 +73,14 @@ export const signUp = catchAsync(async (req, res, next) => {
     .json({ message: `New user ${user.email} is registered`, data: user });
 });
 
+/**
+ * @param {object} req
+ * @param {object} res
+ * @param {object} next
+ * @returns {object} returns response { token, userName, id, role}
+ * @description accessing the site by providing credentials (email and password).
+ **/
+
 export const signIn = catchAsync(async (req, res, next) => {
     const { email, password } = req.body;
     if (!email || !password) {
@@ -98,6 +114,14 @@ export const signIn = catchAsync(async (req, res, next) => {
     res.status(200).json({ token, id, userName, role });
 })
 
+/**
+ * @param {object} req
+ * @param {object} res
+ * @param {object} next
+ * @returns {object} returns response { status, requestedAt, results, data }
+ * @description retreiving (reading) all users from database.
+ **/
+
 export const getUserAccounts = catchAsync(async (req, res, next) => {
   const features = new APIFeatures(User.find().select("-password"), req.query)
     .filter()
@@ -117,6 +141,14 @@ export const getUserAccounts = catchAsync(async (req, res, next) => {
   });
 });
 
+/**
+ * @param {object} req
+ * @param {object} res
+ * @param {object} next
+ * @returns {object} returns response { data }
+ * @description retreiving (reading) specific user from database.
+ **/
+
 export const getSpecificUserAccount = catchAsync(async (req, res, next) => {
   const { id } = req.params;
   const user = await User.findById(id).select("-password");
@@ -125,8 +157,16 @@ export const getSpecificUserAccount = catchAsync(async (req, res, next) => {
     return next(new appError("Couldn't find this User", 404));
   }
 
-  res.status(200).json({ user });
+  res.status(200).json({ data : user });
 });
+
+/**
+ * @param {object} req
+ * @param {object} res
+ * @param {object} next
+ * @returns {object} returns response { message , data }
+ * @description updating logged user from database.
+ **/
 
 export const updateAccount = catchAsync(async (req, res, next) => {
   const {
@@ -191,6 +231,14 @@ export const updateAccount = catchAsync(async (req, res, next) => {
   }
 });
 
+/**
+ * @param {object} req
+ * @param {object} res
+ * @param {object} next
+ * @returns {void} returns nothing as the status code is 204 No Content
+ * @description deleting logged user from database.
+ **/
+
 export const deleteAccount = catchAsync(async (req, res, next) => {
 
   const user = await User.findById(req.user.id);
@@ -207,27 +255,6 @@ export const deleteAccount = catchAsync(async (req, res, next) => {
     return next(new appError("Failed to delete User Account.", 403));
   }
 });
-
-
-// Get User Account Data
-const getUserAccountData = async (req, res) => {
-  const user = await User.findById(req.user._id).select('-password');
-  if (user) {
-    res.json(user);
-  } else {
-    res.status(404).json({ message: 'User not found' });
-  }
-};
-
-// Get Profile Data for Another User
-const getProfileData = async (req, res) => {
-  const user = await User.findById(req.params.id).select('-password');
-  if (user) {
-    res.json(user);
-  } else {
-    res.status(404).json({ message: 'User not found' });
-  }
-};
 
 // Update Password
 const updatePassword = async (req, res) => {
