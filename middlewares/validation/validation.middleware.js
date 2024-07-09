@@ -16,7 +16,7 @@ const validationHandler = (schema) => {
     }
 
     validationErrors.length
-      ? next(new appError(`Validation Error: ${validationErrors}`, 400))
+      ? next(new appError("Validation Error", 400, validationErrors))
       : next();
   }
 }
