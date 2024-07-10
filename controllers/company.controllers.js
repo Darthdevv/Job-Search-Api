@@ -4,7 +4,13 @@ import appError from "../utils/appError.js";
 import { catchAsync } from "../utils/catchAsync.js";
 import APIFeatures from "../utils/apiFeatures.js";
 
-
+/**
+ * @param {object} req
+ * @param {object} res
+ * @param {object} next
+ * @returns {object} returns response {message, data}
+ * @description add new company
+ **/
 
 export const addCompanyData = catchAsync(async (req, res, next) => {
     const {
@@ -53,6 +59,14 @@ export const addCompanyData = catchAsync(async (req, res, next) => {
       .status(201)
       .json({ message: "Company's data has been added successfully.", data: company });
 });
+
+/**
+ * @param {object} req
+ * @param {object} res
+ * @param {object} next
+ * @returns {object} returns response {message, data}
+ * @description update specific company data by id
+ **/
 
 export const updateCompanyData = catchAsync(async (req, res, next) => {
   const { id } = req.params;
@@ -118,6 +132,13 @@ export const updateCompanyData = catchAsync(async (req, res, next) => {
   }
 });
 
+/**
+ * @param {object} req
+ * @param {object} res
+ * @param {object} next
+ * @returns {void} returns nothing as the status code is 204 No Content
+ * @description delete specific company data by id
+ **/
 
 export const deleteCompanyData = catchAsync(async (req, res, next) => {
   const { id } = req.params;
@@ -136,6 +157,13 @@ export const deleteCompanyData = catchAsync(async (req, res, next) => {
   }
 });
 
+/**
+ * @param {object} req
+ * @param {object} res
+ * @param {object} next
+ * @returns {object} returns response { status, requestedAt, results, data}
+ * @description retreive (read) company data from database
+ **/
 
 export const getCompanyData = catchAsync(async (req, res, next) => {
   const features = new APIFeatures(Company.find(), req.query)
@@ -155,8 +183,15 @@ export const getCompanyData = catchAsync(async (req, res, next) => {
   });
 });
 
+/**
+ * @param {object} req
+ * @param {object} res
+ * @param {object} next
+ * @returns {object} returns response { status, requestedAt, results, data}
+ * @description filters company data by Name from database
+ **/
 
-export const searchCompanyByBame = catchAsync(async (req, res, next) => {
+export const searchCompanyByName = catchAsync(async (req, res, next) => {
   const features = new APIFeatures(Company.find(), req.query)
     .filter();
   const companies = await features.query;

@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import appError from "../../utils/appError.js";
 
 /**
- * @returns {undefined} - The function itself does not return any value explicitly (i.e., it returns undefined implicitly as it is an async function). Instead, it passes control to the next middleware or route handler using the next function
+ * @returns {void} - The function itself does not return any value explicitly (i.e., it returns undefined implicitly as it is an async function). Instead, it passes control to the next middleware or route handler using the next function
  * @description Who are you ? ... Checks if the user is authenticated or not
  */
 

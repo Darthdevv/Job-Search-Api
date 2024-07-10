@@ -5,7 +5,13 @@ import appError from "../utils/appError.js";
 import { catchAsync } from "../utils/catchAsync.js";
 import APIFeatures from "../utils/apiFeatures.js";
 
-
+/**
+ * @param {object} req
+ * @param {object} res
+ * @param {object} next
+ * @returns {object} returns response {message, data}
+ * @description add new job
+ **/
 
 export const addJob = catchAsync(async (req, res, next) => {
   const {
@@ -57,6 +63,14 @@ export const addJob = catchAsync(async (req, res, next) => {
 });
 
 
+/**
+ * @param {object} req
+ * @param {object} res
+ * @param {object} next
+ * @returns {object} returns response {status, requestedAt, results, data}
+ * @description retreive (read) all jobs from database
+ **/
+
 export const getAllJobs = catchAsync(async (req, res, next) => {
 
   const features = new APIFeatures(Job.find().populate('addedBy').populate('companyId'), req.query)
@@ -77,6 +91,13 @@ export const getAllJobs = catchAsync(async (req, res, next) => {
   });
 });
 
+/**
+ * @param {object} req
+ * @param {object} res
+ * @param {object} next
+ * @returns {object} returns response {status, requestedAt, results, data}
+ * @description retreive (read) specific job by companyName
+ **/
 
 export const getJobsForSpecificCompany = catchAsync(async (req, res, next) => {
   const { companyName } = req.query;
@@ -97,6 +118,13 @@ export const getJobsForSpecificCompany = catchAsync(async (req, res, next) => {
   }
 })
 
+/**
+ * @param {object} req
+ * @param {object} res
+ * @param {object} next
+ * @returns {object} returns response {message, data}
+ * @description update specific job by id
+ **/
 
 export const updateJob = catchAsync(async (req, res, next) => {
   const { id } = req.params;
@@ -150,6 +178,13 @@ export const updateJob = catchAsync(async (req, res, next) => {
 });
 
 
+/**
+ * @param {object} req
+ * @param {object} res
+ * @param {object} next
+ * @returns {void} returns nothing as the status code is 204 No Content
+ * @description delete specific job by id
+ **/
 
 export const deleteJob = catchAsync(async (req, res, next) => {
   const { id } = req.params;
