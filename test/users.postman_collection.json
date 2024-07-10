@@ -1,0 +1,235 @@
+{
+	"info": {
+		"_postman_id": "3d658241-1d2b-4b54-8944-b5887456393a",
+		"name": "users",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28118566"
+	},
+	"item": [
+		{
+			"name": "Sign Up",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "firstName",
+							"value": "Cody",
+							"type": "text"
+						},
+						{
+							"key": "lastName",
+							"value": "Bryant",
+							"type": "text"
+						},
+						{
+							"key": "userName",
+							"value": "Cody Bryant",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "codybryant@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "Aa1234@@",
+							"type": "text"
+						},
+						{
+							"key": "recoveryEmail",
+							"value": "appstartpaon@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "DOB",
+							"value": "2022-10-24",
+							"type": "text"
+						},
+						{
+							"key": "mobileNumber",
+							"value": "01011300010",
+							"type": "text"
+						},
+						{
+							"key": "role",
+							"value": "user",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{BASE_URI}}/users/signup",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"users",
+						"signup"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Sign In",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "jamesbond@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "password",
+							"value": "Aa1234@@",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{BASE_URI}}/users/signin",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"users",
+						"signin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URI}}/users",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Specific User",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URI}}/users/668ab4c5a9513746d216c9bd",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"users",
+						"668ab4c5a9513746d216c9bd"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User Account",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OGRiY2ZlNGU1MGU5MmJkNTAxZjM2ZSIsInVzZXJOYW1lIjoiSmFtZXMgQm9uZCIsImlhdCI6MTcyMDU2NTAwNiwiZXhwIjoxNzIwNjUxNDA2fQ.MhTGGx9i3hZ1rattvjwyB90uAdGj1y4qTopp2rqJK6Y",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "firstName",
+							"value": "James",
+							"type": "text"
+						},
+						{
+							"key": "lastName",
+							"value": "Bond",
+							"type": "text"
+						},
+						{
+							"key": "email",
+							"value": "jamesbond007@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "DOB",
+							"value": "1999-05-05",
+							"type": "text"
+						},
+						{
+							"key": "recoveryEmail",
+							"value": "sdikxccc@gmail.com",
+							"type": "text"
+						},
+						{
+							"key": "mobileNumber",
+							"value": "01012360020",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{BASE_URI}}/users",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User Account",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OGRiY2ZlNGU1MGU5MmJkNTAxZjM2ZSIsInVzZXJOYW1lIjoiSmFtZXMgQm9uZCIsImlhdCI6MTcyMDU2NTA4MiwiZXhwIjoxNzIwNjUxNDgyfQ.uyoX4IGNwq0KTkIEqnyMgswdt5iBrRa7z2ZEPMOQWRY",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URI}}/users",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"users"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

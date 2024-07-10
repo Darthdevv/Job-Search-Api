@@ -1,0 +1,184 @@
+{
+	"info": {
+		"_postman_id": "b49d2032-832b-48e2-9d3a-3a1857a0e653",
+		"name": "jobs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28118566"
+	},
+	"item": [
+		{
+			"name": "Add Job",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OGRiZDhmNGU1MGU5MmJkNTAxZjM3ZSIsInVzZXJOYW1lIjoiSmFtZXMgQm9uZCIsImlhdCI6MTcyMDU4MjU3NiwiZXhwIjoxNzIwNjY4OTc2fQ.co--FWr2fejPMNQxrOTzZk79bLXmn6--Glg0wmCWYXM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"jobTitle\": \"React Front-end Developer\",\n  \"jobLocation\": \"hybrid\",\n  \"workingTime\": \"part-time\",\n  \"seniorityLevel\": \"Mid-Level\",\n  \"jobDescription\": \"We are looking for a React Front-end developer to join our team. You will be responsible for managing the interchange of data between the server and the users.\",\n  \"technicalSkills\": [\"React\", \"Next\", \"Tailwind\", \"REST APIs\"],\n  \"softSkills\": [\"Communication\", \"Teamwork\", \"Problem-solving\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URI}}/jobs",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"jobs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "All Jobs",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OGRiZDhmNGU1MGU5MmJkNTAxZjM3ZSIsInVzZXJOYW1lIjoiSmFtZXMgQm9uZCIsImlhdCI6MTcyMDU4MjU3NiwiZXhwIjoxNzIwNjY4OTc2fQ.co--FWr2fejPMNQxrOTzZk79bLXmn6--Glg0wmCWYXM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URI}}/jobs",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"jobs"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Jobs For Specific Company",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OGRiZDhmNGU1MGU5MmJkNTAxZjM3ZSIsInVzZXJOYW1lIjoiSmFtZXMgQm9uZCIsImlhdCI6MTcyMDU4MjU3NiwiZXhwIjoxNzIwNjY4OTc2fQ.co--FWr2fejPMNQxrOTzZk79bLXmn6--Glg0wmCWYXM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URI}}/jobs/jobs-for-company?companyName=Microsoft",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"jobs",
+						"jobs-for-company"
+					],
+					"query": [
+						{
+							"key": "companyName",
+							"value": "Microsoft"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Job",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OGRiZDhmNGU1MGU5MmJkNTAxZjM3ZSIsInVzZXJOYW1lIjoiSmFtZXMgQm9uZCIsImlhdCI6MTcyMDU4MjU3NiwiZXhwIjoxNzIwNjY4OTc2fQ.co--FWr2fejPMNQxrOTzZk79bLXmn6--Glg0wmCWYXM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n  \"jobTitle\": \"React Front-end Developer\",\n  \"jobLocation\": \"hybrid\",\n  \"workingTime\": \"part-time\",\n  \"seniorityLevel\": \"Mid-Level\",\n  \"jobDescription\": \"We are looking for a React Front-end developer to join our team. You will be responsible for building user interfaces with great design.\",\n  \"technicalSkills\": [\"React\", \"Next\", \"Tailwind\", \"Javascript\"],\n  \"softSkills\": [\"Communication\", \"Teamwork\", \"Problem-solving\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URI}}/jobs/668e07f30a02235ed8dac5cd",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"jobs",
+						"668e07f30a02235ed8dac5cd"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Job",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OGRiZDhmNGU1MGU5MmJkNTAxZjM3ZSIsInVzZXJOYW1lIjoiSmFtZXMgQm9uZCIsImlhdCI6MTcyMDU4MjU3NiwiZXhwIjoxNzIwNjY4OTc2fQ.co--FWr2fejPMNQxrOTzZk79bLXmn6--Glg0wmCWYXM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URI}}/jobs/668e07f30a02235ed8dac5cd",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"jobs",
+						"668e07f30a02235ed8dac5cd"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

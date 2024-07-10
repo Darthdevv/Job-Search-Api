@@ -1,0 +1,172 @@
+{
+	"info": {
+		"_postman_id": "c51761ee-2aa0-438e-8e7a-16a4ff330176",
+		"name": "companies",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28118566"
+	},
+	"item": [
+		{
+			"name": "Add Company Data",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OGRiZDhmNGU1MGU5MmJkNTAxZjM3ZSIsInVzZXJOYW1lIjoiSmFtZXMgQm9uZCIsImlhdCI6MTcyMDU4MjU3NiwiZXhwIjoxNzIwNjY4OTc2fQ.co--FWr2fejPMNQxrOTzZk79bLXmn6--Glg0wmCWYXM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"companyName\" : \"Microsoft\",\n    \"description\": \"Tech company for digital solutions\",\n    \"industry\": \"Technology\",\n    \"address\": \"cairo, 6th of October, Egypt\",\n    \"numberOfEmployees\": 1000,\n    \"companyEmail\": \"Microsoft@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URI}}/companies",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"companies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search Company Data By Name",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OGRiZDhmNGU1MGU5MmJkNTAxZjM3ZSIsInVzZXJOYW1lIjoiSmFtZXMgQm9uZCIsImlhdCI6MTcyMDU4MjU3NiwiZXhwIjoxNzIwNjY4OTc2fQ.co--FWr2fejPMNQxrOTzZk79bLXmn6--Glg0wmCWYXM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URI}}/companies/search?companyName=Microsoft",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"companies",
+						"search"
+					],
+					"query": [
+						{
+							"key": "companyName",
+							"value": "Microsoft"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Company Data",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OGRiZDhmNGU1MGU5MmJkNTAxZjM3ZSIsInVzZXJOYW1lIjoiSmFtZXMgQm9uZCIsImlhdCI6MTcyMDU4MjU3NiwiZXhwIjoxNzIwNjY4OTc2fQ.co--FWr2fejPMNQxrOTzZk79bLXmn6--Glg0wmCWYXM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URI}}/companies",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"companies"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Company Data",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OGRiZDhmNGU1MGU5MmJkNTAxZjM3ZSIsInVzZXJOYW1lIjoiSmFtZXMgQm9uZCIsImlhdCI6MTcyMDU4MjU3NiwiZXhwIjoxNzIwNjY4OTc2fQ.co--FWr2fejPMNQxrOTzZk79bLXmn6--Glg0wmCWYXM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"companyName\" : \"Microsoft\",\n    \"description\": \"Tech company for software solutions\",\n    \"industry\": \"Technology\",\n    \"address\": \"cairo, 6th of October, Egypt\",\n    \"numberOfEmployees\": 1500,\n    \"companyEmail\": \"Microsoft@gmail.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{BASE_URI}}/companies/668e073b0a02235ed8dac5c1",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"companies",
+						"668e073b0a02235ed8dac5c1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Company Data",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2OGRiZDhmNGU1MGU5MmJkNTAxZjM3ZSIsInVzZXJOYW1lIjoiSmFtZXMgQm9uZCIsImlhdCI6MTcyMDU4MjU3NiwiZXhwIjoxNzIwNjY4OTc2fQ.co--FWr2fejPMNQxrOTzZk79bLXmn6--Glg0wmCWYXM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{BASE_URI}}/companies/668e05a3cb1f10c16f1c50a7",
+					"host": [
+						"{{BASE_URI}}"
+					],
+					"path": [
+						"companies",
+						"668e05a3cb1f10c16f1c50a7"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
