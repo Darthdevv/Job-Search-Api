@@ -115,7 +115,9 @@ export const getSpecificCompanyByNameSchema = {
 };
 
 export const updateCompanySchema = {
-  params: generalRules.objectId.required(),
+  params: Joi.object({
+    id: Joi.string().length(24).hex().required(),
+  }),
   body: Joi.object({
     companyName: Joi.string()
       .min(2)
@@ -199,7 +201,9 @@ export const updateCompanySchema = {
 };
 
 export const deleteCompanySchema = {
-  params: generalRules.objectId.required(),
+  params: Joi.object({
+    id: Joi.string().length(24).hex().required(),
+  }),
   headers: Joi.object({
     ...generalRules.headers,
     authorization: Joi.string(),

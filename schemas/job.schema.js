@@ -124,6 +124,9 @@ export const getSpecificJobByCompanyNameSchema = {
 };
 
 export const updateJobSchema = {
+  params: Joi.object({
+    id: Joi.string().length(24).hex().required(),
+  }),
   body: Joi.object({
     jobTitle: Joi.string()
       .min(5)
@@ -213,7 +216,9 @@ export const updateJobSchema = {
 };
 
 export const deleteJobSchema = {
-  params: generalRules.objectId.required(),
+  params: Joi.object({
+    id: Joi.string().length(24).hex().required(),
+  }),
   headers: Joi.object({
     ...generalRules.headers,
     authorization: Joi.string(),
