@@ -255,36 +255,3 @@ export const deleteAccount = catchAsync(async (req, res, next) => {
     return next(new appError("Failed to delete User Account.", 403));
   }
 });
-
-// Update Password
-const updatePassword = async (req, res) => {
-  const user = await User.findById(req.user._id);
-
-  if (user && (await user.matchPassword(req.body.currentPassword))) {
-    user.password = req.body.newPassword;
-    await user.save();
-    res.json({ message: 'Password updated successfully' });
-  } else {
-    res.status(401).json({ message: 'Current password is incorrect' });
-  }
-};
-
-// Forget Password
-const forgetPassword = async (req, res) => {
-  const { email, newPassword } = req.body;
-  const user = await User.findOne({ email });
-
-  if (user) {
-    user.password = newPassword;
-    await user.save();
-    res.json({ message: 'Password updated successfully' });
-  } else {
-    res.status(404).json({ message: 'User not found' });
-  }
-};
-
-// Get All Accounts Associated with a Specific Recovery Email
-const getAccountsByRecoveryEmail = async (req, res) => {
-  const users = await User.find({ recoveryEmail: req.params.email }).select('-password');
-  res.json(users);
-};

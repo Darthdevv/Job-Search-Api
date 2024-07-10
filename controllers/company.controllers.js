@@ -207,6 +207,3 @@ export const searchCompanyByName = catchAsync(async (req, res, next) => {
     data: { companies },
   });
 });
-
-
-export const GetApplicationsForSpecificJobs = catchAsync(async (req, res, next) => {});
